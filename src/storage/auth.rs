@@ -1,6 +1,6 @@
 
 use diesel::r2d2::Error;
-use diesel::sql_types::Bool;
+
 use diesel::{RunQueryDsl, QueryDsl, QueryResult, ExpressionMethods};
 use rand::{distributions::Alphanumeric,Rng};
 
