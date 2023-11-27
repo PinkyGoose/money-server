@@ -2,12 +2,17 @@
 use log::warn;
 use tonic::{Request, Status, Response};
 
+use crate::storage::Storage;
+
 use self::money_server::Money;
 
 tonic::include_proto!("money");
 
 #[derive(Default)]
-pub struct MyMoneyServer{}
+pub struct MyMoneyServer{
+
+    storage: Storage,
+}
 
 #[tonic::async_trait]
 impl Money for MyMoneyServer{

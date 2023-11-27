@@ -13,10 +13,10 @@ prost = "0.12.2" # Rust Protocol Buffers implementation
 prost-types = "0.12.2" # Contains definitions of Protocol Buffers well-known types
 tokio={version = "1.34.0", features = ["macros", "rt-multi-thread"] }
 tokio-stream = { version = "0.1.14", features = ["net"] }
-dotenv="0.15.0"
+# dotenv="0.15.0"
 env_logger = "0.10.1"
 log="0.4.20"
-persistence="0.0.6"
+# persistence="0.0.6"
 clap = { version = "4.4.8", features = ["derive"] }
 sqlx="0.7.2"
 diesel ={ version = "2.1.4", features = ["postgres", "r2d2", "numeric", "chrono"] }
