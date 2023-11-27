@@ -12,6 +12,6 @@ impl Data {
 }
 impl Default for Data {
     fn default() -> Self {
-        Self { pool: create_connection_pool() }
+        Self { pool: create_connection_pool().expect("RRR2") }
     }
 }

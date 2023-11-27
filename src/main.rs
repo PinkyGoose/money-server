@@ -1,8 +1,8 @@
 
 
-use std::{net::{SocketAddr, Ipv4Addr, IpAddr}, env};
+use std::{net::{SocketAddr, Ipv4Addr, IpAddr}};
 
-use diesel::{r2d2::{ConnectionManager, Pool}, PgConnection};
+
 use dotenv::dotenv;
 mod my_money_server;
 pub mod storage;

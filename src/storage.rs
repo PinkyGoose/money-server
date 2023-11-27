@@ -11,12 +11,15 @@ use diesel::{r2d2::{ConnectionManager, Pool, PooledConnection}, PgConnection};
 
 pub type Postgre = Pool<ConnectionManager<PgConnection>>;
 
-pub fn create_connection_pool() -> Postgre {
+pub fn create_connection_pool() ->   Option<Postgre> {
     let db_url = env::var("DATABASE_URL").expect("Can't get DB URL");
     let manager = ConnectionManager::<PgConnection>::new(db_url);
-    Pool::builder()
+    let a = Pool::builder()
         .build(manager)
-        .expect("Failed to create pool")
+        .expect("Failed to create pool");
+    Some(a)
+    // let pool = 
+
 }
 type Conn = PooledConnection<ConnectionManager<PgConnection>>;
 

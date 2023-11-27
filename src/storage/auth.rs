@@ -28,7 +28,7 @@ impl Auth {
 }
 impl Default for Auth {
     fn default() -> Self {
-        Self { pool: create_connection_pool() }
+        Self { pool: create_connection_pool().expect("RRR")}
     }
 }
 
