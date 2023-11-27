@@ -1,6 +1,6 @@
 
 
-use std::{net::{SocketAddr, Ipv4Addr, IpAddr}};
+use std::{net::{SocketAddr, Ipv4Addr, IpAddr}, env};
 
 
 use dotenv::dotenv;
@@ -28,14 +28,17 @@ struct ClientCli {
 
 
 
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenv().ok();
 
     env_logger::init();
-    let addr=SocketAddr::new(IpAddr::V4(
-        Ipv4Addr::new(127, 0, 0, 1)), 6667);
-    info!("Starting Solar System info server");
+    
+    let server_addr = env::var("SERVER_ADDR").expect("Can't get DB URL");
+    // let server_url = env::var("SERVER_PORT").expect("Can't get DB URL");
+    let addr=server_addr.parse().expect("Invalid addres");
+    info!("Starting Server on {server_addr}");
 
     let haha = MyMoneyServer::default();
     Server::builder()

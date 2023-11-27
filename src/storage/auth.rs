@@ -1,6 +1,6 @@
 
 use diesel::result::Error;
-use diesel::{RunQueryDsl, QueryDsl, QueryResult, Insertable};
+use diesel::{RunQueryDsl, QueryDsl, QueryResult};
 use rand::{distributions::Alphanumeric,Rng};
 
 use super::{models::NewUser, schema::users};
