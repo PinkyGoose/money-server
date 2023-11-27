@@ -1,0 +1,150 @@
+syntax = "proto3";
+
+package money;
+
+import "google/protobuf/timestamp.proto";
+// import "google/protobuf/empty.proto";
+
+// service SolarSystemInfo {
+//   rpc GetPlanetsList (google.protobuf.Empty) returns (PlanetsListResponse);
+//   rpc GetPlanet (PlanetRequest) returns (PlanetResponse);
+//   rpc GetPlanets (google.protobuf.Empty) returns (stream PlanetResponse);
+// }
+
+// message PlanetsListResponse {
+//   repeated string list = 1;
+// }
+
+// message PlanetRequest {
+//   string name = 1;
+// }
+
+// message PlanetResponse {
+//   Planet planet = 1;
+// }
+
+// message Planet {
+//   uint64 id = 1;
+//   string name = 2;
+//   Type type = 3;
+//   float meanRadius = 4;
+//   float mass = 5;
+//   repeated Satellite satellites = 6;
+//   bytes image = 7;
+// }
+
+// enum Type {
+//   TERRESTRIAL_PLANET = 0;
+//   GAS_GIANT = 1;
+//   ICE_GIANT = 2;
+//   DWARF_PLANET = 3;
+// }
+
+// message Satellite {
+//   uint64 id = 1;
+//   string name = 2;
+//   google.protobuf.Timestamp first_spacecraft_landing_date = 3;
+// }
+service Money {
+    // rpc GetPlanetsList (google.protobuf.Empty) returns (PlanetsListResponse);
+    // rpc GetPlanet (PlanetRequest) returns (PlanetResponse);
+    // rpc GetPlanets (google.protobuf.Empty) returns (stream PlanetResponse);
+    rpc register(RegisterRequest) returns (RegisterResponce);
+    rpc login(LoginRequest) returns (LoginResponce);
+    rpc quit(QuitRequest) returns (QuitResponce);
+    rpc new_limit(NewLimitRequest) returns (NewLimitResponce);
+    rpc add_row_to_data(AddRowToDataRequest) returns (AddRowToDataResponce);
+    rpc new_list(NewListRequest) returns (NewListResponce);
+    rpc get_all_data(GetAllDataRequest) returns (GetAllDataResponce);
+    rpc get_all_limits(GetAllLimitsRequest) returns (GetAllLimitsResponce);
+}
+message RegisterRequest{
+    string username = 1;
+    string mail = 2;
+    string encrypted_pass = 3;
+}
+message RegisterResponce{
+    QueryStatus status = 1;
+    string token = 2;
+}
+
+message LoginRequest{
+    string username = 1;
+    string token = 2;
+    string encrypted_pass =3;
+    
+}
+message LoginResponce{
+    string token = 1;
+}
+
+message QuitRequest{
+    string username = 1;
+    string token = 2;
+}
+message QuitResponce{
+    QueryStatus stat = 1;
+}
+
+message AddRowToDataRequest{
+    RowData data = 1;
+}
+message AddRowToDataResponce{
+    QueryStatus status = 1;
+}
+message RowData{
+    MoneyType type = 1;
+    string listName = 2;
+    float sum = 3;
+
+}
+message NewLimitRequest{
+    Limit lim = 1;
+}
+message NewLimitResponce{
+    QueryStatus status = 1;
+}
+message NewListRequest{
+    MoneyType type = 1;
+    string listName = 2;
+
+}
+message NewListResponce{
+    QueryStatus status = 1;
+}
+message Limit{
+    string listName = 1;
+    float lim = 2;
+    google.protobuf.Timestamp startData = 3;
+
+}
+enum MoneyType{
+    UNKNOWN_TYPE = 0;
+    INVESTMENT = 1;
+    EXPENSES = 2;
+}
+enum QueryStatus{
+    UNKNOWN_QS = 0;
+    OK = 1;
+    DENIED = 2;
+}
+message GetAllDataRequest{
+    string username = 1;
+}
+
+message GetAllDataResponce{
+    repeated RowData datas = 1;
+}
+message GetAllLimitsRequest{
+    string username = 1;
+}
+message GetAllLimitsResponce{
+    repeated Limit limits = 1;
+}
+message TODO{
+    //TODO разобраться с oneof
+    oneof test_oneof {
+        RegisterRequest name = 4;
+        LoginRequest sub_message = 9;
+      }
+}
