@@ -29,6 +29,8 @@ fn get_connection(pool: &Postgre) -> Conn {
 
 
 use crate::storage::auth::Auth;
+
+use self::auth::MyError;
 mod auth;
 mod data;
 #[derive(Default)]
@@ -40,7 +42,7 @@ pub struct Storage{
 impl Storage {
 
 
-    pub fn insert_user(&self ,email: String, name: String, pass: String)->Result<String, Error> {
+    pub fn insert_user(&self ,email: String, name: String, pass: String)->Result<String, MyError> {
         
         self.auth.insert_user(email,name, pass)
         // let names = users::table.select(users::username).load(conn)?;

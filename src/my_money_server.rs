@@ -22,26 +22,27 @@ async fn register(&self,
     let a=request.into_inner();
 
     let res = self.storage.insert_user(a.mail,a.username,a.encrypted_pass);
+    Ok(Response::new(
     match &res {
         Ok(u)=>{
-            let _reply = RegisterResponce{
+            RegisterResponce{
                 status:0,
                 token:u.to_string()
-            };
-        }
+            }
+        },
         Err(_)=>{
-            let _reply = RegisterResponce{
-                status:0,
+            RegisterResponce{
+                status:2,
                 token:String::from("")
-            };
+            }
         }
         
     }
-    let reply = RegisterResponce{
-        status:0,
-        token:res.unwrap()
-    };
-    Ok(Response::new(reply))
+    // let reply = RegisterResponce{
+    //     status:0,
+    //     token:res
+    // };
+    ))
 }
     async fn login(&self,
     request:Request<LoginRequest>,
