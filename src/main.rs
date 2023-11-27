@@ -1,11 +1,12 @@
 
-pub mod storage;
-use std::net::{SocketAddr, Ipv4Addr, IpAddr};
 
-/*
+use std::{net::{SocketAddr, Ipv4Addr, IpAddr}, env};
+
+use diesel::{r2d2::{ConnectionManager, Pool}, PgConnection};
 use dotenv::dotenv;
-*/
 mod my_money_server;
+pub mod storage;
+// pub mod storage;
 use log::info;
 
 use crate::my_money_server::MyMoneyServer;
@@ -29,7 +30,8 @@ struct ClientCli {
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // dotenv().ok();
+    dotenv().ok();
+
     env_logger::init();
     let addr=SocketAddr::new(IpAddr::V4(
         Ipv4Addr::new(127, 0, 0, 1)), 6667);

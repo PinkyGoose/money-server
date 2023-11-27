@@ -19,10 +19,27 @@ impl Money for MyMoneyServer{
 async fn register(&self,
     request:Request<RegisterRequest>,
 )->Result<Response<RegisterResponce>,Status>{
-    let a = String::from("");
+    let a=request.into_inner();
+
+    let res = self.storage.insert_user(a.mail,a.username,a.encrypted_pass);
+    match &res {
+        Ok(u)=>{
+            let reply = RegisterResponce{
+                status:0,
+                token:u.to_string()
+            };
+        }
+        Err(_)=>{
+            let reply = RegisterResponce{
+                status:0,
+                token:String::from("")
+            };
+        }
+        
+    }
     let reply = RegisterResponce{
         status:0,
-        token:a
+        token:res.unwrap()
     };
     Ok(Response::new(reply))
 }
