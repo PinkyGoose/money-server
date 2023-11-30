@@ -15,7 +15,7 @@ pub fn create_connection_pool() ->   Option<Postgre> {
     let db_url = env::var("DATABASE_URL").expect("Can't get DB URL");
     let manager = ConnectionManager::<PgConnection>::new(db_url);
     
-    let a = Pool::builder().max_size(3)
+    let a = Pool::builder()
         .build(manager)
         .expect("Failed to create pool");
     
