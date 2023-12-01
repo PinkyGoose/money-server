@@ -1,3 +1,5 @@
+use log::debug;
+
 use super::{Postgre, create_connection_pool};
 
 
@@ -12,6 +14,9 @@ impl Data {
 }
 impl Default for Data {
     fn default() -> Self {
-        Self { pool: create_connection_pool().expect("RRR2") }
+        debug!("creating data connection pool");
+        let res = Self { pool: create_connection_pool().expect("RRR")};
+        debug!("creating data connection pool success");
+        res
     }
 }

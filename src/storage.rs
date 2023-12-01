@@ -8,6 +8,7 @@ use crate::storage::data::Data;
 pub mod schema;
 pub mod models;
 use diesel::{r2d2::{ConnectionManager, Pool, PooledConnection}, PgConnection};
+use log::{error, warn, info, debug};
 
 pub type Postgre = Pool<ConnectionManager<PgConnection>>;
 
@@ -18,7 +19,7 @@ pub fn create_connection_pool() ->   Option<Postgre> {
     let a = Pool::builder()
         .build(manager)
         .expect("Failed to create pool");
-    
+
     Some(a)
     // let pool = 
 

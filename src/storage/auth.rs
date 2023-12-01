@@ -2,6 +2,7 @@
 use diesel::r2d2::Error;
 
 use diesel::{RunQueryDsl, QueryDsl, QueryResult, ExpressionMethods};
+use log::debug;
 use rand::{distributions::Alphanumeric,Rng};
 
 use super::schema::users::{username, email};
@@ -52,7 +53,10 @@ impl Auth {
 }
 impl Default for Auth {
     fn default() -> Self {
-        Self { pool: create_connection_pool().expect("RRR")}
+        debug!("creating auth connection pool");
+        let res = Self { pool: create_connection_pool().expect("RRR")};
+        debug!("creating auth connection pool success");
+        res
     }
 }
 

@@ -1,5 +1,5 @@
 
-use log::warn;
+use log::{warn, error};
 use tonic::{Request, Status, Response};
 
 use crate::storage::Storage;
@@ -30,7 +30,8 @@ async fn register(&self,
                 token:u.to_string()
             }
         },
-        Err(_)=>{
+        Err(e)=>{
+            error!("error in register");
             RegisterResponce{
                 status:2,
                 token:String::from("")
